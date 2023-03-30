@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class juegoAritméticoTest {
+public class juegoAritmeticoTest {
 
 	@Test
 	public void test() {
