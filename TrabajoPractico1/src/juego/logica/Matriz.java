@@ -39,7 +39,7 @@ public abstract class Matriz {
 	
 	public int sumaColumna(int col) {
 		// supongo que la matriz es de nxn
-		if((col < this.matriz.get(0).size()) && (col>=0) ) {
+		if((col > this.matriz.get(0).size()) && (col<0) ) {
 			throw new RuntimeException("la columna ingresada no es valida");
 		}
 		
