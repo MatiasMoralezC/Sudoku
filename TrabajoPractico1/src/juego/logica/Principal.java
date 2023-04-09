@@ -1,10 +1,5 @@
 package juego.logica;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.Comment;
-
 import juego.vista.TableroDeTres;
 
 public class Principal {
@@ -18,6 +13,9 @@ public class Principal {
 		 * Intancio las clases
 		 */
 		
-		TableroDeTres tabDeTres;
+		TableroDeTres tabDeTres = new TableroDeTres();
+		MatrizRandom matrizRandDeTres = new MatrizRandom(3);
+		MatrizACompletar matrizACDeTres = new MatrizACompletar(3);
+		Observador observador = new Observador();
 	}
 }
