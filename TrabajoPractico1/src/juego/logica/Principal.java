@@ -1,9 +1,9 @@
-package juego.clases;
+package juego.logica;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class juegoAritmetico {
-
+public class Principal {
+	
 	
 }
