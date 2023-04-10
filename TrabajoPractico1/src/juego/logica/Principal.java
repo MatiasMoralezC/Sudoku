@@ -16,6 +16,6 @@ public class Principal {
 		TableroDeTres tabDeTres = new TableroDeTres();
 		MatrizRandom matrizRandDeTres = new MatrizRandom(3);
 		MatrizACompletar matrizACDeTres = new MatrizACompletar(3);
-		Observador observador = new Observador();
+		Observador observador = new Observador(tabDeTres, matrizACDeTres);
 	}
 }

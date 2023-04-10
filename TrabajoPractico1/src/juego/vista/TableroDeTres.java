@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -16,10 +19,13 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
+import juego.logica.MatrizACompletar;
+import juego.logica.Observador;
+
 public class TableroDeTres {
 
 	public JFrame frame;
-	private JTextField textField;
+	private JTextField textField_0;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -36,6 +42,10 @@ public class TableroDeTres {
 	private JTextField textField_30;
 	private JTextField textField_31;
 	private JTextField textField_32;
+	
+	ArrayList<JTextField> cuadriculas = new ArrayList<JTextField>();
+	ArrayList<Integer> valoresParaCuadriculas = new ArrayList<Integer>();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,8 +73,34 @@ public class TableroDeTres {
 		}
 		
 		initialize();
+		pegarMatrizEnVista(null);
 	}
 
+	public void pegarMatrizEnVista(MatrizACompletar matriz) {
+//		for (int f = 0; f < (ArrayList<?>matriz.si); f++) {
+//			for (int c = 0; c < ((Collection) matriz).size(); c++) {
+//				valoresParaCuadriculas.add(matriz[f][c]);
+//			}
+//		}
+		
+		int[] arr = {1,2,3,4,5,6,7,8,9};
+		for (int i = 0; i < arr.length; i++) {
+			valoresParaCuadriculas.add(i);
+		}
+		
+		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
+			JTextField cuadri = cuadriculas.get(i);
+			cuadri.setText(valoresParaCuadriculas.get(i).toString());
+		}
+		
+		
+		
+	}
+	
+	/*
+	 * private void guardarCamposVista(JTextField campo) { cuadriculas.add(campo); }
+	 */
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -75,59 +111,68 @@ public class TableroDeTres {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField.setBounds(10, 10, 80, 80);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textField_0 = new JTextField();
+		textField_0.setFont(new Font("Tahoma", Font.PLAIN, 54));
+		textField_0.setBounds(10, 10, 80, 80);
+		frame.getContentPane().add(textField_0);
+		textField_0.setColumns(10);
+		cuadriculas.add(textField_0);
 
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_1.setBounds(10, 101, 80, 80);
+		textField_1.setBounds(100, 10, 80, 80);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+		cuadriculas.add(textField_1);
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_2.setBounds(10, 192, 80, 80);
+		textField_2.setBounds(190, 10, 80, 80);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
+		cuadriculas.add(textField_2);
 
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_3.setBounds(100, 10, 80, 80);
+		textField_3.setBounds(10, 101, 80, 80);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
+		cuadriculas.add(textField_3);
 
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_4.setBounds(100, 101, 80, 80);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
+		cuadriculas.add(textField_4);
 
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_5.setBounds(100, 192, 80, 80);
+		textField_5.setBounds(190, 101, 80, 80);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
+		cuadriculas.add(textField_5);
 
 		textField_6 = new JTextField();
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_6.setBounds(190, 10, 80, 80);
+		textField_6.setBounds(10, 192, 80, 80);
 		frame.getContentPane().add(textField_6);
 		textField_6.setColumns(10);
+		cuadriculas.add(textField_6);
 
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 54));
-		textField_7.setBounds(190, 101, 80, 80);
+		textField_7.setBounds(100, 192, 80, 80);
 		frame.getContentPane().add(textField_7);
 		textField_7.setColumns(10);
+		cuadriculas.add(textField_7);
 
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_8.setBounds(190, 192, 80, 80);
 		frame.getContentPane().add(textField_8);
 		textField_8.setColumns(10);
+		cuadriculas.add(textField_8);
 
 		// Separadores
 
