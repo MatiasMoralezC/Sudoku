@@ -8,6 +8,9 @@ import juego.logica.Matriz;
 import juego.logica.MatrizACompletar;
 import juego.logica.MatrizRandom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class juegoAritmeticoTest {
 	Matriz matrizRandom;
 	Matriz matrizACompletar;
@@ -51,13 +54,62 @@ public class juegoAritmeticoTest {
 		exeptMtrz = new MatrizACompletar(-1);
 	}
 
+	@Test
+	public void crearFilaTamanioRandomCorrecto() {
+		assertTrue(matrizRandom.crearFila(tamanio).size() == tamanio);
+	}
+	
+	@Test
+	public void crearFilaTamanioACompletarCorrecto() {
+		assertTrue(matrizACompletar.crearFila(tamanio).size() == tamanio);
+	}
+
+	@Test
+	public void sumarTodasLasColumnasCorrectamente() {
+		int acum = 0;
+		for(int i=0; i<tamanio; i++) {
+			acum -= 1;
+		}
+		
+		assertEquals(acum, (int) matrizACompletar.getSumasColumnas().get(0));
+	}
 	
 	
+	// -- sonIguales
 	
+	@Test
+	public void sonIgualesCorrecto() {
+		Matriz mtrzUno = new MatrizACompletar(3);
+		Matriz mtrzDos = new MatrizACompletar(3);
+		
+		assertTrue( mtrzUno.sonIguales(mtrzDos.getMatriz()) );
+	}
 	
+	@Test
+	public void sonIgualesDistintas() {
+		Matriz mtrzUno = new MatrizRandom(3);
+		Matriz mtrzDos = new MatrizRandom(3);
+		
+		assertFalse( mtrzUno.sonIguales(mtrzDos.getMatriz()) );
+	}
 	
+	@Test(expected = Exception.class)
+	public void sonIgualesUnoDistinto() {
+		// la matriz uno es más grande que la 2
+		Matriz mtrzUno = new MatrizACompletar(4);
+		Matriz mtrzDos = new MatrizACompletar(3);
+		
+		mtrzUno.sonIguales(mtrzDos.getMatriz());
+	}
 	
-	
+	@Test(expected = Exception.class)
+	public void sonIgualesDosDistinto() {
+		// la matriz uno es más grande que la 2
+		Matriz mtrzUno = new MatrizACompletar(3);
+		Matriz mtrzDos = new MatrizACompletar(4);
+		
+		mtrzUno.sonIguales(mtrzDos.getMatriz());
+	}
 	
 	
 	

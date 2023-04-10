@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatrizRandom extends Matriz {
-	private int randomNum;
-	private int randomNumRange = 10;
 	private Observador observador;
 
 	public MatrizRandom(int tamanio) {
@@ -14,11 +12,13 @@ public class MatrizRandom extends Matriz {
 	
 	@Override
 	public List<Integer> crearFila(int tamanio) {
+		int randomNum;
+		int randomNumRange = 10;
 		List<Integer> fila = new ArrayList<Integer>();
 		
 		for(int i = 0; i< tamanio; i++) {
-			this.randomNum = (int) (Math.random()* this.randomNumRange);
-			fila.add( this.randomNum );
+			randomNum = (int) (Math.random()* randomNumRange);
+			fila.add( randomNum );
 			
 		}
 		

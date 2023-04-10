@@ -39,7 +39,7 @@ public abstract class Matriz {
 	
 	public int sumaColumna(int col) {
 		// supongo que la matriz es de nxn
-		if((col > this.matriz.get(0).size()) && (col<0) ) {
+		if((col > this.matriz.get(0).size()) || (col<0) ) {
 			throw new RuntimeException("la columna ingresada no es valida");
 		}
 		
@@ -75,6 +75,25 @@ public abstract class Matriz {
 		return sumFila;
 	}
 	
+	public boolean sonIguales(List<List<Integer>> otraMatriz) {
+		if( otraMatriz == null || otraMatriz.contains(null) ) {
+			throw new RuntimeException("no ingresaste una matriz valida");
+		}
+		if( otraMatriz.size() != matriz.size() ) {
+			throw new RuntimeException("las matrices tienen un tamanio distinto");
+		}
+		
+		for(int fila=0; fila<matriz.size(); fila++) {
+			for(int col=0; col<matriz.get(fila).size(); col++) {
+				if(matriz.get(fila).get(col) != otraMatriz.get(fila).get(col)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	
 	public List<List<Integer>> getMatriz() {
 		return matriz;
@@ -87,5 +106,6 @@ public abstract class Matriz {
 	public List<Integer> getSumasColumnas() {
 		return sumasColumnas;
 	}
+	
 
 }

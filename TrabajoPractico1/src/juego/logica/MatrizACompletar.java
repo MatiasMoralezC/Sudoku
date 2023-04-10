@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatrizACompletar extends Matriz {
-	// faltaCompletar indicara no esta completa la matriz
-	int faltaCompletar = -1;
 	private Observador observador;
 
 	public MatrizACompletar(int tamanio) {
@@ -15,6 +13,9 @@ public class MatrizACompletar extends Matriz {
 
 	@Override
 	public List<Integer> crearFila(int tamanio) {
+		// faltaCompletar indicara no esta completa la matriz
+		int faltaCompletar = -1;
+		
 		List<Integer> fila = new ArrayList<Integer>();
 		for(int i=0; i<tamanio; i++) {
 			fila.add( faltaCompletar );
