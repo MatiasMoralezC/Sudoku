@@ -16,6 +16,14 @@ public class Principal {
 		TableroDeTres tabDeTres = new TableroDeTres();
 		MatrizRandom matrizRandDeTres = new MatrizRandom(3);
 		MatrizACompletar matrizACDeTres = new MatrizACompletar(3);
-		Observador observador = new Observador(tabDeTres, matrizACDeTres);
+		Observador observador = new Observador();
+		
+		observador.setTablero(tabDeTres);
+		observador.setMatrizRandom(matrizRandDeTres);
+		observador.setMatrizACompletar(matrizACDeTres);
+		
+		tabDeTres.setObservador(observador);
+		matrizACDeTres.setObservador(observador);
+		matrizRandDeTres.setObservador(observador);
 	}
 }

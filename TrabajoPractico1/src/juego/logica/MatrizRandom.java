@@ -6,6 +6,7 @@ import java.util.List;
 public class MatrizRandom extends Matriz {
 	private int randomNum;
 	private int randomNumRange = 10;
+	private Observador observador;
 
 	public MatrizRandom(int tamanio) {
 		super(tamanio);
@@ -22,6 +23,11 @@ public class MatrizRandom extends Matriz {
 		}
 		
 		return fila;
+	}
+
+	public void setObservador(Observador obs) {
+		this.observador = obs;
+		
 	}
 
 

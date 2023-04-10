@@ -8,9 +8,9 @@ import juego.vista.TableroDeTres;
 
 public class Observador {
 	
-	public Observador(TableroDeTres tDeTres, MatrizACompletar mACompletar) {
-		pegarMatrizEnVista(tDeTres,mACompletar);
-	}
+	TableroDeTres tabDeTres;
+	MatrizACompletar matrizACompletar;
+	MatrizRandom matrizRandom;
 	
 	public List<List<Integer>> getMatrizACompletar() {
 		Matriz mat = new MatrizACompletar(3);
@@ -20,6 +20,26 @@ public class Observador {
 
 	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar mACompletar) {
 		tDeTres.pegarMatrizEnVista(mACompletar);
+	}
+	
+	public void mostrarTablero() {
+		this.tabDeTres.setVisible(true);
+	}
+
+	public void setTablero(TableroDeTres tDeTres) {
+		this.tabDeTres = tDeTres;
+		mostrarTablero();
+		pegarMatrizEnVista(this.tabDeTres, this.matrizACompletar);
+	}
+
+	public void setMatrizRandom(MatrizRandom matrizRandDeTres) {
+		this.matrizRandom = matrizRandDeTres;
+		
+	}
+
+	public void setMatrizACompletar(MatrizACompletar matrizACDeTres) {
+		this.matrizACompletar = matrizACDeTres;
+		
 	}
 	
 }

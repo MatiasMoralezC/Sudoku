@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -23,7 +24,7 @@ import juego.logica.MatrizACompletar;
 import juego.logica.Observador;
 
 public class TableroDeTres {
-
+	
 	public JFrame frame;
 	private JTextField textField_0;
 	private JTextField textField_1;
@@ -43,24 +44,15 @@ public class TableroDeTres {
 	private JTextField textField_31;
 	private JTextField textField_32;
 	
+	private Observador observador;
 	ArrayList<JTextField> cuadriculas = new ArrayList<JTextField>();
 	ArrayList<Integer> valoresParaCuadriculas = new ArrayList<Integer>();
+	ArrayList<Integer> sumaFilas = new ArrayList<Integer>();
+	ArrayList<Integer> sumaColumnas = new ArrayList<Integer>();
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TableroDeTres tabDeTres = new TableroDeTres();
-					tabDeTres.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -74,12 +66,23 @@ public class TableroDeTres {
 		
 		initialize();
 		pegarMatrizEnVista(null);
+		vaciarCuadriculasEditables();
+	}
+	
+	public void setObservador(Observador obs) {
+		this.observador = obs;
 	}
 
+	/*
+	 * public void validarSolucion() { observador.esSolucionCorrecta(); }
+	 */
+	
+	
+	
 	public void pegarMatrizEnVista(MatrizACompletar matriz) {
-//		for (int f = 0; f < (ArrayList<?>matriz.si); f++) {
-//			for (int c = 0; c < ((Collection) matriz).size(); c++) {
-//				valoresParaCuadriculas.add(matriz[f][c]);
+//		for (int i = 0; i < matriz.size(); i++) {
+//			for (int j = 0; j < matriz.get(i).size(); j++) {
+//				
 //			}
 //		}
 		
@@ -87,19 +90,43 @@ public class TableroDeTres {
 		for (int i = 0; i < arr.length; i++) {
 			valoresParaCuadriculas.add(i);
 		}
-		
+		guardarValoresCuadriculasEnArrayList(cuadriculas);
+
 		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			cuadri.setText(valoresParaCuadriculas.get(i).toString());
+			System.out.println(i);
+			
 		}
-		
-		
-		
 	}
 	
-	/*
-	 * private void guardarCamposVista(JTextField campo) { cuadriculas.add(campo); }
-	 */
+	private void vaciarCuadriculasEditables() {
+		for (int i = 0; i < cuadriculas.size(); i++) {
+			JTextField cuadri = cuadriculas.get(i);
+			if (cuadri.isEditable()) {
+				cuadri.setText(null);
+			}
+		}
+	}
+	
+	private boolean sonCuadriculasCorrectas() {
+		
+		return true;
+	}
+	
+	private void guardarValoresCuadriculasEnArrayList(ArrayList<JTextField> lista) {
+		JTextField campos[] = {textField_0, textField_1, textField_2,
+				textField_3, textField_4, textField_5,
+				textField_6, textField_7, textField_8};
+		
+		for (int i = 0; i < campos.length; i++) {
+			lista.add(campos[i]);
+		}
+	}
+	
+	private ArrayList<JTextField> getCuadriculas() {
+		return cuadriculas;
+	}
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -116,63 +143,60 @@ public class TableroDeTres {
 		textField_0.setBounds(10, 10, 80, 80);
 		frame.getContentPane().add(textField_0);
 		textField_0.setColumns(10);
-		cuadriculas.add(textField_0);
 
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_1.setBounds(100, 10, 80, 80);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
-		cuadriculas.add(textField_1);
 
 		textField_2 = new JTextField();
+		textField_2.setEditable(false);
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_2.setBounds(190, 10, 80, 80);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
-		cuadriculas.add(textField_2);
 
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_3.setBounds(10, 101, 80, 80);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
-		cuadriculas.add(textField_3);
 
 		textField_4 = new JTextField();
+		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_4.setBounds(100, 101, 80, 80);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
-		cuadriculas.add(textField_4);
 
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_5.setBounds(190, 101, 80, 80);
 		frame.getContentPane().add(textField_5);
 		textField_5.setColumns(10);
-		cuadriculas.add(textField_5);
 
 		textField_6 = new JTextField();
+		textField_6.setEditable(false);
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_6.setBounds(10, 192, 80, 80);
 		frame.getContentPane().add(textField_6);
 		textField_6.setColumns(10);
-		cuadriculas.add(textField_6);
 
 		textField_7 = new JTextField();
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_7.setBounds(100, 192, 80, 80);
 		frame.getContentPane().add(textField_7);
 		textField_7.setColumns(10);
-		cuadriculas.add(textField_7);
 
 		textField_8 = new JTextField();
+		textField_8.setEditable(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_8.setBounds(190, 192, 80, 80);
 		frame.getContentPane().add(textField_8);
 		textField_8.setColumns(10);
-		cuadriculas.add(textField_8);
 
 		// Separadores
 
@@ -236,6 +260,11 @@ public class TableroDeTres {
 		frame.getContentPane().add(btnNuevaPartida);
 
 		JButton btnComprobar = new JButton("Comprobar");
+		btnComprobar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				guardarSolucion();
+			}
+		});
 		btnComprobar.setBounds(641, 51, 118, 30);
 		frame.getContentPane().add(btnComprobar);
 
@@ -259,6 +288,37 @@ public class TableroDeTres {
 		textField_35.setBounds(641, 181, 96, 20);
 		frame.getContentPane().add(textField_35);
 		textField_35.setColumns(10);
+	}
+
+	private void guardarSolucion() {
+		ArrayList<JTextField> listSolucion = new ArrayList<JTextField>(3);
+		List<List<Integer>> listSolucionValores = new ArrayList<List<Integer>>(3);
+		guardarValoresCuadriculasEnArrayList(listSolucion);
+		int cont = 0;
+		for (int i = 0; i < 3; i++) {
+			listSolucionValores.add(new ArrayList<Integer>(3));
+			for (int j = 0; j < 3; j++) {
+				if (listSolucion.get(cont).getText().isEmpty()) throw new RuntimeException("Ingrese todos los valores");
+				listSolucionValores.get(i).add(Integer.parseInt(listSolucion.get(cont).getText()));
+				cont++;
+			}
+		}
+		System.out.println("---");
+		System.out.println(listSolucionValores);
+		//return listSolucionValores;
+	}
+
+	public void setVisible(final boolean b) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TableroDeTres tabDeTres = new TableroDeTres();
+					tabDeTres.frame.setVisible(b);					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 }
