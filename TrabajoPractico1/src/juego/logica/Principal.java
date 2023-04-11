@@ -18,9 +18,9 @@ public class Principal {
 		MatrizACompletar matrizACDeTres = new MatrizACompletar(3);
 		Observador observador = new Observador();
 		
-		observador.setTablero(tabDeTres);
 		observador.setMatrizRandom(matrizRandDeTres);
 		observador.setMatrizACompletar(matrizACDeTres);
+		observador.setTablero(tabDeTres);
 		
 		tabDeTres.setObservador(observador);
 		matrizACDeTres.setObservador(observador);

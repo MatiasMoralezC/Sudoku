@@ -16,16 +16,26 @@ public class Observador {
 		
 	}
 	
-	public boolean actualizarMatrizACompletar(List<List<Integer>> matriz) {
-		return matrizACompletar.actualizarMatriz(matriz);
+	public Matriz getMatrizRandom() {
+		return this.matrizRandom;
 	}
 	
-	public boolean sonMatricesIguales() {
-		return matrizRandom.sonIguales(matrizACompletar.getMatriz());
+//	public boolean actualizarMatrizACompletar(List<List<Integer>> matriz) {
+//		return matrizACompletar.actualizarMatriz(matriz);
+//	}
+	
+	public boolean sonMatricesIguales(Matriz matriz) {
+		return matrizRandom.sonIguales(matriz.getMatriz());
 	}
 
-	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar mACompletar) {
-		tDeTres.pegarMatrizEnVista(mACompletar);
+	/*
+	 * public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar
+	 * mACompletar) { tDeTres.pegarMatrizEnVista(mACompletar);
+	 * //tDeTres.pegarMatrizEnVista(getMatrizACompletar()); }
+	 */
+	
+	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizRandom matrizRandom) {
+		tDeTres.pegarMatrizEnVista(matrizRandom);
 	}
 	
 	public void mostrarTablero() {
@@ -35,7 +45,7 @@ public class Observador {
 	public void setTablero(TableroDeTres tDeTres) {
 		this.tabDeTres = tDeTres;
 		mostrarTablero();
-		pegarMatrizEnVista(this.tabDeTres, this.matrizACompletar);
+		pegarMatrizEnVista(this.tabDeTres, this.matrizRandom);
 	}
 
 	public void setMatrizRandom(MatrizRandom matrizRandDeTres) {
@@ -47,7 +57,5 @@ public class Observador {
 		this.matrizACompletar = matrizACDeTres;
 		
 	}
-
-
 	
 }

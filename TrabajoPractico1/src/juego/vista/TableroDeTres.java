@@ -22,7 +22,7 @@ import juego.logica.MatrizRandom;
 import juego.logica.Observador;
 
 public class TableroDeTres {
-	
+
 	public JFrame frame;
 	private JTextField textField_0;
 	private JTextField textField_1;
@@ -33,7 +33,6 @@ public class TableroDeTres {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
-	private JTextField textField_35;
 	private JSeparator separator_1;
 	private JTextField textField_25;
 	private JTextField textField_26;
@@ -41,13 +40,15 @@ public class TableroDeTres {
 	private JTextField textField_30;
 	private JTextField textField_31;
 	private JTextField textField_32;
-	
+
 	private Observador observador;
 	ArrayList<JTextField> cuadriculas = new ArrayList<JTextField>();
 	ArrayList<Integer> valoresParaCuadriculas = new ArrayList<Integer>();
 	ArrayList<Integer> sumaFilas = new ArrayList<Integer>();
 	ArrayList<Integer> sumaColumnas = new ArrayList<Integer>();
-	
+	ArrayList<JTextField> filasConSuma = new ArrayList<JTextField>(3);
+	ArrayList<JTextField> ColumnasConSuma = new ArrayList<JTextField>(3);
+
 	/**
 	 * Launch the application.
 	 */
@@ -61,66 +62,9 @@ public class TableroDeTres {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		initialize();
-		pegarMatrizEnVista( new MatrizRandom(3) ); //  ojo que puse un new para safar          (!)          (!)          (!)          (!)          (!)          (!)
-		vaciarCuadriculasEditables();
-	}
-	
-
-
-	/*
-	 * public void validarSolucion() { observador.esSolucionCorrecta(); }
-	 */
-	
-	
-	
-	public void pegarMatrizEnVista(Matriz matriz) {
-		if( matriz == null || matriz.getMatriz().contains(null) ) {
-			throw new RuntimeException("no ingresaste una matriz valida");
-		}
-		
-		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
-			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
-				valoresParaCuadriculas.add( (int) matriz.getMatriz().get(fila).get(col) );
-			}
-		}
-		
-		guardarValoresCuadriculasEnArrayList(cuadriculas);
-
-		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
-			JTextField cuadri = cuadriculas.get(i);
-			cuadri.setText(valoresParaCuadriculas.get(i).toString());
-			System.out.println(i);
-			
-		}
-	}
-	
-	private void vaciarCuadriculasEditables() {
-		for (int i = 0; i < cuadriculas.size(); i++) {
-			JTextField cuadri = cuadriculas.get(i);
-			if (cuadri.isEditable()) {
-				cuadri.setText("");
-			}
-		}
-	}
-	
-	private boolean sonCuadriculasCorrectas() {
-		System.out.println("se ejecuta son cuadriculas iguales");
-		return observador.sonMatricesIguales();
-	}
-	
-	private void guardarValoresCuadriculasEnArrayList(ArrayList<JTextField> lista) {
-		JTextField campos[] = {textField_0, textField_1, textField_2,
-				textField_3, textField_4, textField_5,
-				textField_6, textField_7, textField_8};
-		
-		for (int i = 0; i < campos.length; i++) {
-			lista.add(campos[i]);
-		}
 	}
 
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -247,21 +191,16 @@ public class TableroDeTres {
 		textField_32.setColumns(10);
 
 		// Botones
-
-		JButton btnNuevaPartida = new JButton("Nueva Partida");
-		btnNuevaPartida.setBounds(641, 10, 118, 30);
-		frame.getContentPane().add(btnNuevaPartida);
-
 		JButton btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guardarSolucion();
+				boolean terminarPartida = sonMatricesIguales();
 //				// si guardar solucion devuelve un booleano, se debe finalizar la partida
 //				boolean terminarPartida = guardarSolucion();
-//				if (terminarPartida) {
-//					System.exit(0); // momentaneamente sirve para terminar la jugada
-//				}
-				
+				if (terminarPartida) {
+					System.exit(0); // momentaneamente sirve para terminar la jugada
+				}
+
 			}
 		});
 		btnComprobar.setBounds(641, 51, 118, 30);
@@ -276,51 +215,21 @@ public class TableroDeTres {
 		btnSalir.setBounds(641, 92, 118, 30);
 		frame.getContentPane().add(btnSalir);
 
-		// Tiempo
-
-		JLabel lblMejorTiempo = new JLabel("MEJOR TIEMPO");
-		lblMejorTiempo.setBounds(641, 150, 100, 20);
-		frame.getContentPane().add(lblMejorTiempo);
-
-		textField_35 = new JTextField();
-		textField_35.setEditable(false);
-		textField_35.setBounds(641, 181, 96, 20);
-		frame.getContentPane().add(textField_35);
-		textField_35.setColumns(10);
+		vaciarCuadriculasEditables();
 	}
 
-	private List<List<Integer>> guardarSolucion() {
-		ArrayList<JTextField> listSolucion = new ArrayList<JTextField>(3);
-		List<List<Integer>> listSolucionValores = new ArrayList<List<Integer>>(3);
-		guardarValoresCuadriculasEnArrayList(listSolucion);
-		int cont = 0;
-		for (int i = 0; i < 3; i++) {
-			listSolucionValores.add(new ArrayList<Integer>(3));
-			for (int j = 0; j < 3; j++) {
-				if (listSolucion.get(cont).getText().isEmpty()) throw new RuntimeException("Ingrese todos los valores");
-				listSolucionValores.get(i).add( Integer.parseInt(listSolucion.get(cont).getText()) );
-				cont++;
-			}
-		}
-		
-		System.out.println("---");
-		System.out.println(listSolucionValores);
-		
-		/*
-		 * Aqui me aparece un error con el observer, como que no lo reconoce
-		 * La idea es que actualice la matrizACompletar, y luego compare
-		*/
-//		observador.actualizarMatrizACompletar(listSolucionValores);
-//		boolean sonIguales = sonCuadriculasCorrectas();
-//		return sonIguales; // con esto se debe cambiar la firma del metodo para que devuelva un booleano
-		
-		return listSolucionValores;
+	/*-----------------------------------------------------------------------------------------------------------------*/
+
+	private void iniciar() {
+		// pegarMatrizEnVista(observador.getMatrizRandom()); // ojo que puse un new para
+		// safar (!) (!) (!) (!) (!) (!)
+		// vaciarCuadriculasEditables();
 	}
 
 	public void setVisible(final boolean b) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				// esto hace que se ejecute de inmediato          (!)          (!)          (!)          (!)          (!)          (!)          (!)          (!)
+				// esto hace que se ejecute de inmediato (!) (!) (!) (!) (!) (!) (!) (!)
 				try {
 					TableroDeTres tabDeTres = new TableroDeTres();
 					tabDeTres.frame.setVisible(b);
@@ -331,13 +240,105 @@ public class TableroDeTres {
 		});
 	}
 
-	
-	private ArrayList<JTextField> getCuadriculas() {
-		return cuadriculas;
+	public void pegarMatrizEnVista(Matriz matriz) {
+		if( matriz == null || matriz.getMatriz().contains(null) ) {
+			throw new RuntimeException("no ingresaste una matriz valida");
+		}
+		
+		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
+			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
+				//System.out.println("A: "+ matriz.getMatriz().get(fila).get(col) );
+				valoresParaCuadriculas.add(matriz.getMatriz().get(fila).get(col) );
+			}
+		}
+		
+		guardarValoresCuadriculasEnArrayList(cuadriculas);
+		System.out.println("HOLA: " + valoresParaCuadriculas.toString());
+		textField_0.setText(valoresParaCuadriculas.get(0).toString());
+		
+		  for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
+			  JTextField cuadricula = cuadriculas.get(i);
+			  cuadricula.setText(valoresParaCuadriculas.get(i).toString());
+		  }
+		 
 	}
-	
+
+	private void vaciarCuadriculasEditables() {
+		for (int i = 0; i < cuadriculas.size(); i++) {
+			JTextField cuadri = cuadriculas.get(i);
+			if (cuadri.isEditable()) {
+				cuadri.setText("5");
+			}
+		}
+	}
+
+	private boolean sonCuadriculasCorrectas() {
+		System.out.println("se ejecuta son cuadriculas iguales");
+		return observador.sonMatricesIguales((Matriz) guardarSolucion());
+	}
+
+	private void guardarValoresCuadriculasEnArrayList(ArrayList<JTextField> lista) {
+		JTextField campos[] = { textField_0, textField_1, textField_2, textField_3, textField_4, textField_5,
+				textField_6, textField_7, textField_8 };
+
+		for (int i = 0; i < campos.length; i++) {
+			lista.add(campos[i]);
+		}
+	}
+
+	private void guardarFilasConSuma() {
+		JTextField filas[] = { textField_25, textField_26, textField_27 };
+
+		for (int i = 0; i < filas.length; i++) {
+			filasConSuma.add(filas[i]);
+		}
+	}
+
+	private void guardarColumnasConSuma() {
+		JTextField columnas[] = { textField_30, textField_31, textField_32 };
+
+		for (int i = 0; i < columnas.length; i++) {
+			filasConSuma.add(columnas[i]);
+		}
+	}
+
+	private List<List<Integer>> guardarSolucion() {
+		ArrayList<JTextField> listSolucion = new ArrayList<JTextField>(3);
+		List<List<Integer>> matrizSolucionConValores = new ArrayList<List<Integer>>(3);
+		guardarValoresCuadriculasEnArrayList(listSolucion);
+		int cont = 0;
+		for (int i = 0; i < 3; i++) {
+			matrizSolucionConValores.add(new ArrayList<Integer>(3));
+			for (int j = 0; j < 3; j++) {
+				if (listSolucion.get(cont).getText().isEmpty())
+					throw new RuntimeException("Ingrese todos los valores");
+				matrizSolucionConValores.get(i).add(Integer.parseInt(listSolucion.get(cont).getText()));
+				cont++;
+			}
+		}
+
+		System.out.println("---");
+		System.out.println(matrizSolucionConValores);
+
+		/*
+		 * Aqui me aparece un error con el observer, como que no lo reconoce La idea es
+		 * que actualice la matrizACompletar, y luego compare
+		 */
+//		observador.actualizarMatrizACompletar(listSolucionValores);
+//		boolean sonIguales = sonCuadriculasCorrectas();
+//		return sonIguales; // con esto se debe cambiar la firma del metodo para que devuelva un booleano
+
+		return matrizSolucionConValores;
+	}
+
+	private boolean sonMatricesIguales() {
+		boolean sonIguales = sonCuadriculasCorrectas();
+		return sonIguales;
+	}
+
 	public void setObservador(Observador obs) {
 		this.observador = obs;
+		iniciar();
 	}
 
 }
