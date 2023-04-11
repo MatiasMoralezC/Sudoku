@@ -63,7 +63,7 @@ public class TableroDeTres {
 		}
 		
 		initialize();
-		pegarMatrizEnVista( new MatrizRandom(3) );
+		pegarMatrizEnVista( new MatrizRandom(3) ); //  ojo que puse un new para safar          (!)          (!)          (!)          (!)          (!)          (!)
 		vaciarCuadriculasEditables();
 	}
 	
@@ -256,6 +256,12 @@ public class TableroDeTres {
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				guardarSolucion();
+//				// si guardar solucion devuelve un booleano, se debe finalizar la partida
+//				boolean terminarPartida = guardarSolucion();
+//				if (terminarPartida) {
+//					System.exit(0); // momentaneamente sirve para terminar la jugada
+//				}
+				
 			}
 		});
 		btnComprobar.setBounds(641, 51, 118, 30);
@@ -314,9 +320,10 @@ public class TableroDeTres {
 	public void setVisible(final boolean b) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				// esto hace que se ejecute de inmediato          (!)          (!)          (!)          (!)          (!)          (!)          (!)          (!)
 				try {
 					TableroDeTres tabDeTres = new TableroDeTres();
-					tabDeTres.frame.setVisible(b);					
+					tabDeTres.frame.setVisible(b);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
