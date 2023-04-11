@@ -80,19 +80,20 @@ public class TableroDeTres {
 	
 	
 	public void pegarMatrizEnVista(MatrizACompletar matriz) {
-//		for (int i = 0; i < matriz.size(); i++) {
-//			for (int j = 0; j < matriz.get(i).size(); j++) {
-//				
-//			}
-//		}
 		
-		int[] arr = {1,2,3,4,5,6,7,8,9};
-		for (int i = 0; i < arr.length; i++) {
-			valoresParaCuadriculas.add(arr[i]);
+		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
+			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
+				valoresParaCuadriculas.add( (int) matriz.getMatriz().get(fila).get(col) );
+			}
 		}
+		
+//		int[] arr = {1,2,3,4,5,6,7,8,9};
+//		for (int i = 0; i < arr.length; i++) {
+//			valoresParaCuadriculas.add(arr[i]);
+//		}
 		guardarValoresCuadriculasEnArrayList(cuadriculas);
 
-		for (int i = 1; i <= valoresParaCuadriculas.size(); i++) {
+		for (int i = 0; i <= valoresParaCuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			cuadri.setText(valoresParaCuadriculas.get(i).toString());
 			System.out.println(i);
@@ -110,8 +111,8 @@ public class TableroDeTres {
 	}
 	
 	private boolean sonCuadriculasCorrectas() {
-		
-		return true;
+		System.out.println("se ejecuta son cuadriculas iguales");
+		return observador.sonMatricesIguales();
 	}
 	
 	private void guardarValoresCuadriculasEnArrayList(ArrayList<JTextField> lista) {

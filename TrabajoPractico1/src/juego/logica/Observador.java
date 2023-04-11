@@ -17,6 +17,10 @@ public class Observador {
 		return mat.getMatriz();
 		
 	}
+	
+	public boolean sonMatricesIguales() {
+		return matrizACompletar.sonIguales( matrizRandom.getMatriz() );
+	}
 
 	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar mACompletar) {
 		tDeTres.pegarMatrizEnVista(mACompletar);
