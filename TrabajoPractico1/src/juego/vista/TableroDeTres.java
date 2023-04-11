@@ -47,7 +47,7 @@ public class TableroDeTres {
 	ArrayList<Integer> sumaFilas = new ArrayList<Integer>();
 	ArrayList<Integer> sumaColumnas = new ArrayList<Integer>();
 	ArrayList<JTextField> filasConSuma = new ArrayList<JTextField>(3);
-	ArrayList<JTextField> ColumnasConSuma = new ArrayList<JTextField>(3);
+	ArrayList<JTextField> columnasConSuma = new ArrayList<JTextField>(3);
 
 	/**
 	 * Launch the application.
@@ -260,7 +260,8 @@ public class TableroDeTres {
 			JTextField cuadricula = cuadriculas.get(i);
 			cuadricula.setText(valoresParaCuadriculas.get(i).toString());
 		}
-		setSumaEnFilas(matriz); 
+		setSumaEnFilas(matriz);
+		setSumaEnColumnas(matriz);
 	}
 
 	private void vaciarCuadriculasEditables() {
@@ -295,27 +296,37 @@ public class TableroDeTres {
 	}
 	
 	public void setSumaEnFilas(Matriz matriz) {
-		//Matriz matriz = observador.getMatrizRandom();
-		List<Integer> sumasFilas = new ArrayList<Integer>();
-		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
-			int suma = 0;
-			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
-				suma += matriz.getMatriz().get(fila).get(col);
-				if (col%2==0 && col!=0) {
-					sumasFilas.add(suma);
-				}
-				//matriz.getMatriz().get(fila).get(col) 
-			}
-		}
+		guardarFilasConSuma();
+		List<Integer> sumaFilas = matriz.sumaTodasLasFilas();
 		
-		System.out.println(sumasFilas.toString());
+		for (int i = 0; i < filasConSuma.size(); i++) {
+			filasConSuma.get(i).setText(sumaFilas.get(i).toString());
+			filasConSuma.get(i).setVisible(true);
+			}
+		for (int i = 0; i < filasConSuma.size(); i++) {
+			System.out.println("SumaFilas: " + filasConSuma.get(i).getText());
+			
+		}
 	}
 
 	private void guardarColumnasConSuma() {
 		JTextField columnas[] = { textField_30, textField_31, textField_32 };
 
 		for (int i = 0; i < columnas.length; i++) {
-			filasConSuma.add(columnas[i]);
+			columnasConSuma.add(columnas[i]);
+		}
+	}
+	
+	public void setSumaEnColumnas(Matriz matriz) {
+		guardarColumnasConSuma();
+		List<Integer> sumaColumnas = matriz.sumaTodasLasColumnas();
+		
+		for (int i = 0; i < columnasConSuma.size(); i++) {
+			columnasConSuma.get(i).setText(sumaColumnas.get(i).toString());
+		}
+		
+		for (int i = 0; i < columnasConSuma.size(); i++) {
+			System.out.println("SumaCol: " + columnasConSuma.get(i).getText());
 		}
 	}
 
