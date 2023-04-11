@@ -1,6 +1,5 @@
 package juego.logica;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import juego.vista.TableroDeCinco;
@@ -12,14 +11,17 @@ public class Observador {
 	MatrizACompletar matrizACompletar;
 	MatrizRandom matrizRandom;
 	
-	public List<List<Integer>> getMatrizACompletar() {
-		Matriz mat = new MatrizACompletar(3);
-		return mat.getMatriz();
+	public Matriz getMatrizACompletar() {
+		return matrizACompletar;
 		
 	}
 	
+	public boolean actualizarMatrizACompletar(List<List<Integer>> matriz) {
+		return matrizACompletar.actualizarMatriz(matriz);
+	}
+	
 	public boolean sonMatricesIguales() {
-		return matrizACompletar.sonIguales( matrizRandom.getMatriz() );
+		return matrizRandom.sonIguales(matrizACompletar.getMatriz());
 	}
 
 	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar mACompletar) {
@@ -45,5 +47,7 @@ public class Observador {
 		this.matrizACompletar = matrizACDeTres;
 		
 	}
+
+
 	
 }

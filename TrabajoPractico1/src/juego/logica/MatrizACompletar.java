@@ -1,6 +1,5 @@
 package juego.logica;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,15 @@ public class MatrizACompletar extends Matriz {
 
 	public MatrizACompletar(int tamanio) {
 		super(tamanio);
+	}
+	
+	public boolean actualizarMatriz(List<List<Integer>> otraMatriz) {
+		if( super.sonIguales(otraMatriz) ) {
+			throw new RuntimeException("las matrices son iguales. no se puede actualizar.");
+		}
+		
+		super.setMatriz(otraMatriz);
+		return true;
 	}
 
 	@Override

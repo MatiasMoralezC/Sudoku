@@ -106,6 +106,12 @@ public abstract class Matriz {
 	public List<Integer> getSumasColumnas() {
 		return sumasColumnas;
 	}
+
+	protected void setMatriz(List<List<Integer>> matriz) {
+		this.matriz = matriz;
+	}
+	
+	
 	
 
 }

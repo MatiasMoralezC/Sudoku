@@ -6,12 +6,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
@@ -20,7 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
-import juego.logica.MatrizACompletar;
+import juego.logica.Matriz;
+import juego.logica.MatrizRandom;
 import juego.logica.Observador;
 
 public class TableroDeTres {
@@ -65,13 +63,11 @@ public class TableroDeTres {
 		}
 		
 		initialize();
-		pegarMatrizEnVista(null);
+		pegarMatrizEnVista( new MatrizRandom(3) );
 		vaciarCuadriculasEditables();
 	}
 	
-	public void setObservador(Observador obs) {
-		this.observador = obs;
-	}
+
 
 	/*
 	 * public void validarSolucion() { observador.esSolucionCorrecta(); }
@@ -79,7 +75,10 @@ public class TableroDeTres {
 	
 	
 	
-	public void pegarMatrizEnVista(MatrizACompletar matriz) {
+	public void pegarMatrizEnVista(Matriz matriz) {
+		if( matriz == null || matriz.getMatriz().contains(null) ) {
+			throw new RuntimeException("no ingresaste una matriz valida");
+		}
 		
 		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
 			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
@@ -87,13 +86,9 @@ public class TableroDeTres {
 			}
 		}
 		
-//		int[] arr = {1,2,3,4,5,6,7,8,9};
-//		for (int i = 0; i < arr.length; i++) {
-//			valoresParaCuadriculas.add(arr[i]);
-//		}
 		guardarValoresCuadriculasEnArrayList(cuadriculas);
 
-		for (int i = 0; i <= valoresParaCuadriculas.size(); i++) {
+		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			cuadri.setText(valoresParaCuadriculas.get(i).toString());
 			System.out.println(i);
@@ -124,10 +119,7 @@ public class TableroDeTres {
 			lista.add(campos[i]);
 		}
 	}
-	
-	private ArrayList<JTextField> getCuadriculas() {
-		return cuadriculas;
-	}
+
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -300,12 +292,22 @@ public class TableroDeTres {
 			listSolucionValores.add(new ArrayList<Integer>(3));
 			for (int j = 0; j < 3; j++) {
 				if (listSolucion.get(cont).getText().isEmpty()) throw new RuntimeException("Ingrese todos los valores");
-				listSolucionValores.get(i).add(Integer.parseInt(listSolucion.get(cont).getText()));
+				listSolucionValores.get(i).add( Integer.parseInt(listSolucion.get(cont).getText()) );
 				cont++;
 			}
 		}
+		
 		System.out.println("---");
 		System.out.println(listSolucionValores);
+		
+		/*
+		 * Aqui me aparece un error con el observer, como que no lo reconoce
+		 * La idea es que actualice la matrizACompletar, y luego compare
+		*/
+//		observador.actualizarMatrizACompletar(listSolucionValores);
+//		boolean sonIguales = sonCuadriculasCorrectas();
+//		return sonIguales; // con esto se debe cambiar la firma del metodo para que devuelva un booleano
+		
 		return listSolucionValores;
 	}
 
@@ -320,6 +322,15 @@ public class TableroDeTres {
 				}
 			}
 		});
+	}
+
+	
+	private ArrayList<JTextField> getCuadriculas() {
+		return cuadriculas;
+	}
+	
+	public void setObservador(Observador obs) {
+		this.observador = obs;
 	}
 
 }
