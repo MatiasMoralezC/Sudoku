@@ -256,11 +256,11 @@ public class TableroDeTres {
 		System.out.println("HOLA: " + valoresParaCuadriculas.toString());
 		textField_0.setText(valoresParaCuadriculas.get(0).toString());
 		
-		  for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
-			  JTextField cuadricula = cuadriculas.get(i);
-			  cuadricula.setText(valoresParaCuadriculas.get(i).toString());
-		  }
-		 
+		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
+			JTextField cuadricula = cuadriculas.get(i);
+			cuadricula.setText(valoresParaCuadriculas.get(i).toString());
+		}
+		setSumaEnFilas(matriz); 
 	}
 
 	private void vaciarCuadriculasEditables() {
@@ -292,6 +292,23 @@ public class TableroDeTres {
 		for (int i = 0; i < filas.length; i++) {
 			filasConSuma.add(filas[i]);
 		}
+	}
+	
+	public void setSumaEnFilas(Matriz matriz) {
+		//Matriz matriz = observador.getMatrizRandom();
+		List<Integer> sumasFilas = new ArrayList<Integer>();
+		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
+			int suma = 0;
+			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
+				suma += matriz.getMatriz().get(fila).get(col);
+				if (col%2==0 && col!=0) {
+					sumasFilas.add(suma);
+				}
+				//matriz.getMatriz().get(fila).get(col) 
+			}
+		}
+		
+		System.out.println(sumasFilas.toString());
 	}
 
 	private void guardarColumnasConSuma() {
