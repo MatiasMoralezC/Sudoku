@@ -63,6 +63,9 @@ public class juegoAritmeticoTest {
 	public void crearFilaTamanioACompletarCorrecto() {
 		assertTrue(matrizACompletar.crearFila(tamanio).size() == tamanio);
 	}
+	
+	
+//	-- sumarTodasLasColumnas
 
 	@Test
 	public void sumarTodasLasColumnasCorrectamente() {
@@ -74,6 +77,15 @@ public class juegoAritmeticoTest {
 		assertEquals(acum, (int) matrizACompletar.getSumasColumnas().get(0));
 	}
 	
+	@Test(expected = Exception.class)
+	public void sumarTodasLasColumnasConColInvalidaUno() {
+		matrizACompletar.getSumasColumnas().get(10);
+	}
+	
+	@Test(expected = Exception.class)
+	public void sumarTodasLasColumnasConColInvalidaDos() {
+		matrizACompletar.getSumasColumnas().get(-1);
+	}
 	
 	// -- sonIguales
 	
@@ -112,22 +124,41 @@ public class juegoAritmeticoTest {
 	}
 	
 	
+//	-- sumaFila
 	
+	@Test
+	public void sumaFilaCorrectamente() {
+		List<Integer> filaASumar = new ArrayList<Integer>();
+		filaASumar.add(1);
+		filaASumar.add(1);
+		filaASumar.add(1);
+		int sumaFila = (int) matrizACompletar.sumaFila(filaASumar);
+		
+		assertTrue( 3 == sumaFila );
+	}
 	
+	@Test(expected = Exception.class)
+	public void sumaFilaNulo() {
+		List<Integer> filaASumar = null;
+		int sumaFila = matrizACompletar.sumaFila(filaASumar);
+	}
 	
+	@Test
+	public void sumaFilaVacio() {
+		List<Integer> filaASumar = new ArrayList<Integer>();
+		int sumaFila = matrizACompletar.sumaFila(filaASumar);
+		
+		assertTrue(0 == sumaFila);
+	}	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test(expected = Exception.class)
+	public void sumaFilaConNuloDentro() {
+		List<Integer> filaASumar = new ArrayList<Integer>();
+		filaASumar.add(1);
+		filaASumar.add(1);
+		filaASumar.add(null);
+		int sumaFila = matrizACompletar.sumaFila(filaASumar);
+	}
 	
 	
 	
