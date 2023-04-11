@@ -88,11 +88,11 @@ public class TableroDeTres {
 		
 		int[] arr = {1,2,3,4,5,6,7,8,9};
 		for (int i = 0; i < arr.length; i++) {
-			valoresParaCuadriculas.add(i);
+			valoresParaCuadriculas.add(arr[i]);
 		}
 		guardarValoresCuadriculasEnArrayList(cuadriculas);
 
-		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
+		for (int i = 1; i <= valoresParaCuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			cuadri.setText(valoresParaCuadriculas.get(i).toString());
 			System.out.println(i);
@@ -104,7 +104,7 @@ public class TableroDeTres {
 		for (int i = 0; i < cuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			if (cuadri.isEditable()) {
-				cuadri.setText(null);
+				cuadri.setText("");
 			}
 		}
 	}
@@ -290,7 +290,7 @@ public class TableroDeTres {
 		textField_35.setColumns(10);
 	}
 
-	private void guardarSolucion() {
+	private List<List<Integer>> guardarSolucion() {
 		ArrayList<JTextField> listSolucion = new ArrayList<JTextField>(3);
 		List<List<Integer>> listSolucionValores = new ArrayList<List<Integer>>(3);
 		guardarValoresCuadriculasEnArrayList(listSolucion);
@@ -305,7 +305,7 @@ public class TableroDeTres {
 		}
 		System.out.println("---");
 		System.out.println(listSolucionValores);
-		//return listSolucionValores;
+		return listSolucionValores;
 	}
 
 	public void setVisible(final boolean b) {
