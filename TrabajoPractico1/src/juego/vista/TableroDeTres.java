@@ -203,7 +203,8 @@ public class TableroDeTres {
 		txtNoEsCorrecto.setBounds(463, 462, 296, 88);
 		frame.getContentPane().add(txtNoEsCorrecto);
 		txtNoEsCorrecto.setColumns(10);
-		txtNoEsCorrecto.setEnabled(false);
+		txtNoEsCorrecto.setEnabled(true);
+		txtNoEsCorrecto.setVisible(false);
 		
 		// Botones
 		JButton btnComprobar = new JButton("Comprobar");
@@ -213,7 +214,7 @@ public class TableroDeTres {
 //				// si guardar solucion devuelve un booleano, se debe finalizar la partida
 //				boolean terminarPartida = guardarSolucion();
 				if (terminarPartida) {
-					txtNoEsCorrecto.setEnabled(false);
+					txtNoEsCorrecto.setVisible(false);
 					
 					
 					// aviso de que termino
@@ -230,8 +231,7 @@ public class TableroDeTres {
 					txtElJuegoHa.setColumns(10);
 					
 				} else {
-					
-					txtNoEsCorrecto.setEnabled(true);
+					txtNoEsCorrecto.setVisible(true);
 
 				}
 
