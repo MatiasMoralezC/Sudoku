@@ -86,28 +86,24 @@ public class TableroDeTres {
 		textField_0.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setEditable(false);
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_1.setBounds(100, 10, 80, 80);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
 		textField_2 = new JTextField();
-		textField_2.setEditable(false);
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_2.setBounds(190, 10, 80, 80);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setEditable(false);
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_3.setBounds(10, 101, 80, 80);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 
 		textField_4 = new JTextField();
-		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_4.setBounds(100, 101, 80, 80);
 		frame.getContentPane().add(textField_4);
@@ -120,7 +116,6 @@ public class TableroDeTres {
 		textField_5.setColumns(10);
 
 		textField_6 = new JTextField();
-		textField_6.setEditable(false);
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_6.setBounds(10, 192, 80, 80);
 		frame.getContentPane().add(textField_6);
@@ -133,7 +128,6 @@ public class TableroDeTres {
 		textField_7.setColumns(10);
 
 		textField_8 = new JTextField();
-		textField_8.setEditable(false);
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_8.setBounds(190, 192, 80, 80);
 		frame.getContentPane().add(textField_8);
@@ -274,7 +268,7 @@ public class TableroDeTres {
 		for (int i = 0; i < cuadriculas.size(); i++) {
 			JTextField cuadri = cuadriculas.get(i);
 			if (cuadri.isEditable()) {
-				cuadri.setText("5");
+				cuadri.setText("");
 			}
 		}
 	}

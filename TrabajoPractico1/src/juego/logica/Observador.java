@@ -45,7 +45,6 @@ public class Observador {
 	public void setTablero(TableroDeTres tDeTres) {
 		this.tabDeTres = tDeTres;
 		mostrarTablero();
-		//pegarMatrizEnVista(this.tabDeTres, this.matrizRandom);
 	}
 
 	public void setMatrizRandom(MatrizRandom matrizRandDeTres) {
