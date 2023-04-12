@@ -20,6 +20,7 @@ import javax.swing.text.JTextComponent;
 import juego.logica.Matriz;
 import juego.logica.MatrizRandom;
 import juego.logica.Observador;
+import java.awt.Color;
 
 public class TableroDeTres {
 
@@ -48,6 +49,8 @@ public class TableroDeTres {
 	ArrayList<Integer> sumaColumnas = new ArrayList<Integer>();
 	ArrayList<JTextField> filasConSuma = new ArrayList<JTextField>(3);
 	ArrayList<JTextField> columnasConSuma = new ArrayList<JTextField>(3);
+	private JTextField txtElJuegoHa;
+	private JTextField txtNoEsCorrecto;
 
 	/**
 	 * Launch the application.
@@ -78,7 +81,8 @@ public class TableroDeTres {
 		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		
+		//campos juego
 		textField_0 = new JTextField();
 		textField_0.setFont(new Font("Tahoma", Font.PLAIN, 54));
 		textField_0.setBounds(10, 10, 80, 80);
@@ -187,7 +191,20 @@ public class TableroDeTres {
 		textField_32.setBounds(190, 474, 80, 80);
 		frame.getContentPane().add(textField_32);
 		textField_32.setColumns(10);
-
+		
+		
+		// avisa si los datos ingresados no son solucion
+		txtNoEsCorrecto = new JTextField();
+		txtNoEsCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNoEsCorrecto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtNoEsCorrecto.setForeground(new Color(255, 0, 0));
+		txtNoEsCorrecto.setText("Los valores ingresados no son correctos");
+		txtNoEsCorrecto.setEditable(false);
+		txtNoEsCorrecto.setBounds(463, 462, 296, 88);
+		frame.getContentPane().add(txtNoEsCorrecto);
+		txtNoEsCorrecto.setColumns(10);
+		txtNoEsCorrecto.setEnabled(false);
+		
 		// Botones
 		JButton btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
@@ -196,11 +213,26 @@ public class TableroDeTres {
 //				// si guardar solucion devuelve un booleano, se debe finalizar la partida
 //				boolean terminarPartida = guardarSolucion();
 				if (terminarPartida) {
-					System.out.println("SOLUCION VALIDA");
-					System.exit(0); // momentaneamente sirve para terminar la jugada
+					txtNoEsCorrecto.setEnabled(false);
+					
+					
+					// aviso de que termino
+					txtElJuegoHa = new JTextField();
+					txtElJuegoHa.setEnabled(true);
+					txtElJuegoHa.setHorizontalAlignment(SwingConstants.CENTER);
+					txtElJuegoHa.setForeground(new Color(255, 255, 255));
+					txtElJuegoHa.setFont(new Font("Tahoma", Font.PLAIN, 25));
+					txtElJuegoHa.setText("Felicidades!! Has ganado!!");
+					txtElJuegoHa.setBackground(new Color(64, 128, 128));
+					txtElJuegoHa.setEditable(false);
+					txtElJuegoHa.setBounds(200, 150, 387, 188);
+					frame.getContentPane().add(txtElJuegoHa);
+					txtElJuegoHa.setColumns(10);
+					
 				} else {
-					System.out.println("SOLUCION NO VALIDA");
-					System.exit(0);
+					
+					txtNoEsCorrecto.setEnabled(true);
+
 				}
 
 			}
