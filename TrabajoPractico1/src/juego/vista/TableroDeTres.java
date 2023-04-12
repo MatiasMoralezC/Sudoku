@@ -55,14 +55,18 @@ public class TableroDeTres {
 
 	/**
 	 * Create the application.
+	 * @param obs 
 	 */
-	public TableroDeTres() {
+	public TableroDeTres(Observador obs) {
+		this.observador = obs;
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		initialize();
+		pegarMatrizEnVista(observador.getMatrizRandom());
+		vaciarCuadriculasEditables();
 	}
 
 	/**
@@ -198,7 +202,11 @@ public class TableroDeTres {
 //				// si guardar solucion devuelve un booleano, se debe finalizar la partida
 //				boolean terminarPartida = guardarSolucion();
 				if (terminarPartida) {
+					System.out.println("SOLUCION VALIDA");
 					System.exit(0); // momentaneamente sirve para terminar la jugada
+				} else {
+					System.out.println("SOLUCION NO VALIDA");
+					System.exit(0);
 				}
 
 			}
@@ -231,7 +239,7 @@ public class TableroDeTres {
 			public void run() {
 				// esto hace que se ejecute de inmediato (!) (!) (!) (!) (!) (!) (!) (!)
 				try {
-					TableroDeTres tabDeTres = new TableroDeTres();
+					TableroDeTres tabDeTres = new TableroDeTres(observador);
 					tabDeTres.frame.setVisible(b);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -247,14 +255,12 @@ public class TableroDeTres {
 		
 		for(int fila = 0; fila < matriz.getMatriz().size(); fila++ ) {
 			for(int col = 0; col< matriz.getMatriz().get(fila).size(); col++) {
-				//System.out.println("A: "+ matriz.getMatriz().get(fila).get(col) );
 				valoresParaCuadriculas.add(matriz.getMatriz().get(fila).get(col) );
 			}
 		}
 		
 		guardarValoresCuadriculasEnArrayList(cuadriculas);
 		System.out.println("HOLA: " + valoresParaCuadriculas.toString());
-		textField_0.setText(valoresParaCuadriculas.get(0).toString());
 		
 		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
 			JTextField cuadricula = cuadriculas.get(i);
@@ -275,7 +281,7 @@ public class TableroDeTres {
 
 	private boolean sonCuadriculasCorrectas() {
 		System.out.println("se ejecuta son cuadriculas iguales");
-		return observador.sonMatricesIguales((Matriz) guardarSolucion());
+		return observador.sonMatricesIguales(guardarSolucion());
 	}
 
 	private void guardarValoresCuadriculasEnArrayList(ArrayList<JTextField> lista) {
