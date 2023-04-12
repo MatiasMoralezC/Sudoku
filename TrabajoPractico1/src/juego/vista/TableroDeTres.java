@@ -69,6 +69,7 @@ public class TableroDeTres {
 		}
 		initialize();
 		pegarMatrizEnVista(observador.getMatrizRandom());
+		System.out.println("Solucion esperada: " + valoresParaCuadriculas.toString());
 		vaciarCuadriculasEditables();
 	}
 
@@ -193,7 +194,7 @@ public class TableroDeTres {
 		textField_32.setColumns(10);
 		
 		
-		// avisa si los datos ingresados no son solucion
+		// Avisa si los datos ingresados no son solucion
 		txtNoEsCorrecto = new JTextField();
 		txtNoEsCorrecto.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNoEsCorrecto.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -248,22 +249,13 @@ public class TableroDeTres {
 		});
 		btnSalir.setBounds(641, 92, 118, 30);
 		frame.getContentPane().add(btnSalir);
-
-		vaciarCuadriculasEditables();
 	}
 
 	/*-----------------------------------------------------------------------------------------------------------------*/
 
-	private void iniciar() {
-		// pegarMatrizEnVista(observador.getMatrizRandom()); // ojo que puse un new para
-		// safar (!) (!) (!) (!) (!) (!)
-		// vaciarCuadriculasEditables();
-	}
-
 	public void setVisible(final boolean b) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				// esto hace que se ejecute de inmediato (!) (!) (!) (!) (!) (!) (!) (!)
 				try {
 					TableroDeTres tabDeTres = new TableroDeTres(observador);
 					tabDeTres.frame.setVisible(b);
@@ -286,7 +278,6 @@ public class TableroDeTres {
 		}
 		
 		guardarValoresCuadriculasEnArrayList(cuadriculas);
-		System.out.println("HOLA: " + valoresParaCuadriculas.toString());
 		
 		for (int i = 0; i < valoresParaCuadriculas.size(); i++) {
 			JTextField cuadricula = cuadriculas.get(i);
@@ -306,7 +297,6 @@ public class TableroDeTres {
 	}
 
 	private boolean sonCuadriculasCorrectas() {
-		System.out.println("se ejecuta son cuadriculas iguales");
 		return observador.sonMatricesIguales(guardarSolucion());
 	}
 
@@ -335,10 +325,6 @@ public class TableroDeTres {
 			filasConSuma.get(i).setText(sumaFilas.get(i).toString());
 			filasConSuma.get(i).setVisible(true);
 			}
-		for (int i = 0; i < filasConSuma.size(); i++) {
-			System.out.println("SumaFilas: " + filasConSuma.get(i).getText());
-			
-		}
 	}
 
 	private void guardarColumnasConSuma() {
@@ -355,10 +341,6 @@ public class TableroDeTres {
 		
 		for (int i = 0; i < columnasConSuma.size(); i++) {
 			columnasConSuma.get(i).setText(sumaColumnas.get(i).toString());
-		}
-		
-		for (int i = 0; i < columnasConSuma.size(); i++) {
-			System.out.println("SumaCol: " + columnasConSuma.get(i).getText());
 		}
 	}
 
@@ -377,17 +359,6 @@ public class TableroDeTres {
 			}
 		}
 
-		System.out.println("---");
-		System.out.println(matrizSolucionConValores);
-
-		/*
-		 * Aqui me aparece un error con el observer, como que no lo reconoce La idea es
-		 * que actualice la matrizACompletar, y luego compare
-		 */
-//		observador.actualizarMatrizACompletar(listSolucionValores);
-//		boolean sonIguales = sonCuadriculasCorrectas();
-//		return sonIguales; // con esto se debe cambiar la firma del metodo para que devuelva un booleano
-
 		return matrizSolucionConValores;
 	}
 
@@ -398,7 +369,6 @@ public class TableroDeTres {
 
 	public void setObservador(Observador obs) {
 		this.observador = obs;
-		iniciar();
 	}
 
 }

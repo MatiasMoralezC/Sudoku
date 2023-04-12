@@ -1,8 +1,6 @@
 package juego.logica;
 
 import java.util.List;
-
-import juego.vista.TableroDeCinco;
 import juego.vista.TableroDeTres;
 
 public class Observador {
@@ -20,23 +18,9 @@ public class Observador {
 		return this.matrizRandom;
 	}
 	
-//	public boolean actualizarMatrizACompletar(List<List<Integer>> matriz) {
-//		return matrizACompletar.actualizarMatriz(matriz);
-//	}
-	
 	public boolean sonMatricesIguales(List<List<Integer>> matriz) {
 		return matrizRandom.sonIguales(matriz);
 	}
-
-	/*
-	 * public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizACompletar
-	 * mACompletar) { tDeTres.pegarMatrizEnVista(mACompletar);
-	 * //tDeTres.pegarMatrizEnVista(getMatrizACompletar()); }
-	 */
-	
-//	public void pegarMatrizEnVista(TableroDeTres tDeTres, MatrizRandom matrizRandom) {
-//		tDeTres.pegarMatrizEnVista(matrizRandom);
-//	}
 	
 	public void mostrarTablero() {
 		this.tabDeTres.setVisible(true);
